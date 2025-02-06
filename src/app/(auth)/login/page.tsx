@@ -4,10 +4,18 @@ import { Geist } from 'next/font/google'
 import { cn } from '@/lib/utils'
 import { LoginForm } from './login-form'
 import Link from 'next/link'
+import { getCurrentUserId } from '@/server/data/get-current-user'
+import { redirect } from 'next/navigation'
 
 const geist = Geist({ subsets: ['latin'], weight: ['300', '400', '500', '600'] })
 
-export default function Login() {
+export default async function Login() {
+  const user = await getCurrentUserId()
+
+  if (user) {
+    redirect('/')
+  }
+
   return (
     <main className={cn('flex flex-col w-screen h-dvh items-center justify-center space-y-2', geist.className)}>
       <div className="w-80 max-w-80 rounded-xl bg-zinc-100 dark:bg-zinc-900 py-12 px-6 text-center flex flex-col items-center">

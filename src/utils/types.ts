@@ -51,10 +51,18 @@ export const userCreateInputSchema = z.object({
   name: z.string().nullish(),
 })
 
+/** user info */
+export const userInfoSchema = userSchema.omit({
+  createdAt: true,
+  updatedAt: true,
+})
+
 /** user */
 export type User = z.infer<typeof userSchema>
 /** create user input */
 export type UserCreateInput = z.infer<typeof userCreateInputSchema>
+/** user info */
+export type UserInfo = z.infer<typeof userInfoSchema>
 /** access token */
 export type Token = z.infer<typeof tokenSchema>
 /** create access token input */
