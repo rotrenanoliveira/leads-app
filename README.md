@@ -4,3 +4,5 @@
 - [ ] cadastro empresa (nome, logo, descrição)
 - [ ] pagina de captação de leads
 - [ ] pagina de listagem de leads (filtro por data, empresa)
+- [ ] escrever termos de uso
+- [ ] escrever política de privacidade
