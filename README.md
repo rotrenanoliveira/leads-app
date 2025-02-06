@@ -1,8 +1,13 @@
 ### Leads Info
 
-- [ ] cadastro conta (nome, email)
-- [ ] cadastro empresa (nome, logo, descrição)
-- [ ] pagina de captação de leads
-- [ ] pagina de listagem de leads (filtro por data, empresa)
+- [x] cadastro conta
+- [x] login com magic link
+- [x] root layout app
+- [x] corrigir acesso a pagina inicial sem estar logado
+- [ ] cadastro de campanha
+- [ ] pagina de listagem de campanhas
+- [ ] pagina de detalhes de campanha
+- [ ] pagina de listagem de leads
+- [ ] filtro de leads por campanha
 - [ ] escrever termos de uso
 - [ ] escrever política de privacidade

@@ -11,6 +11,7 @@ import {
 import Avatar from 'boring-avatars'
 import { Sparkles, LogOut } from 'lucide-react'
 import { ThemeSwitcher } from './theme-switcher'
+import Link from 'next/link'
 
 interface NavbarUserDropdownProps {
   user: {
@@ -47,9 +48,11 @@ export function NavbarUserDropdown({ user }: NavbarUserDropdownProps) {
         <ThemeSwitcher />
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
-      <DropdownMenuItem>
-        <LogOut />
-        Log out
+      <DropdownMenuItem asChild>
+        <Link href="/api/auth/sign-out" prefetch={false}>
+          <LogOut />
+          Log out
+        </Link>
       </DropdownMenuItem>
     </DropdownMenuContent>
   )
