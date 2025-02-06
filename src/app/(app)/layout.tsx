@@ -1,15 +1,20 @@
+import { KanbanIcon, MegaphoneIcon, NotebookTextIcon, TextIcon } from 'lucide-react'
+import { Space_Mono, Space_Grotesk } from 'next/font/google'
+import { redirect } from 'next/navigation'
 import Link from 'next/link'
 
-import { Space_Mono, Space_Grotesk } from 'next/font/google'
 import { cn } from '@/lib/utils'
-import { KanbanIcon, MegaphoneIcon, NotebookTextIcon, TextIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { NavbarUser } from '@/components/navbar-user'
+import { getCurrentUserId } from '@/server/data/get-current-user'
 
 const spaceMono = Space_Mono({ subsets: ['latin'], weight: ['400'] })
 const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] })
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const userId = await getCurrentUserId()
+  if (!userId) redirect('/login')
+
   return (
     <div
       className={cn(spaceGrotesk.className, 'flex flex-col-reverse md:flex-col lg:flex-row w-screen h-dvh gap-4 p-4')}
