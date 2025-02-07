@@ -17,9 +17,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <div
-      className={cn(spaceGrotesk.className, 'flex flex-col-reverse md:flex-col lg:flex-row w-screen h-dvh gap-4 p-4')}
+      className={cn(spaceGrotesk.className, 'w-screen flex flex-col-reverse md:flex-col lg:flex-row gap-4 p-4 h-svh')}
     >
-      <aside className="w-full lg:max-w-60 flex flex-col md:flex-row lg:flex-col lg:max-h-svh gap-4">
+      <aside className="w-full lg:max-w-60 flex flex-col md:flex-row lg:flex-col gap-4">
         <div className="w-full md:max-w-60 max-h-20 border border-border p-6 md:p-3 lg:p-6 rounded-lg bg-zinc-50 dark:bg-zinc-900">
           <Link
             href="/"
@@ -58,10 +58,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </Button>
             <Button
               variant="link"
-              className="w-full justify-start p-0 m-0 opacity-85 hover:opacity-100 hover:no-underline"
+              className="w-full justify-start p-0 m-0 opacity-85 hover:opacity-100 hover:no-underline hover:line-through"
+              disabled
               asChild
             >
-              <Link href="/leads" className="font-extralight capitalize">
+              <Link href="/" className="font-extralight capitalize line-through">
                 <NotebookTextIcon strokeWidth={1.15} className="size-6" />
                 leads
               </Link>

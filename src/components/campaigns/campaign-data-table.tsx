@@ -44,7 +44,7 @@ export function CampaignsDataTable<TData, TValue>({ columns, data }: CampaignsDa
           placeholder="Filtro por nome..."
           value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
           onChange={(event) => table.getColumn('name')?.setFilterValue(event.target.value)}
-          className="max-w-sm"
+          className="max-w-sm bg-white dark:bg-zinc-950"
         />
 
         <Button variant="default" className="w-fit" asChild>

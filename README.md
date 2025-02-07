@@ -11,3 +11,19 @@
 - [ ] filtro de leads por campanha
 - [ ] escrever termos de uso
 - [ ] escrever política de privacidade
+
+```ts
+
+model Lead {
+  id         String   @id
+  campaignId String   @map("campaign_id")
+  data       String
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id])
+
+  @@index([campaignId])
+  @@map("leads")
+}
+
+```

@@ -1,3 +1,4 @@
+import { ConstructionIcon } from 'lucide-react'
 import { Fragment } from 'react'
 
 export default function Home() {
@@ -8,7 +9,10 @@ export default function Home() {
         leads.gratis
       </div>
       {/* main content */}
-      <div className="flex-1 p-6 overflow-scroll border rounded-lg bg-zinc-50 dark:bg-zinc-900">main content</div>
+      <div className="flex-1 p-6 overflow-scroll flex flex-col gap-4 items-center justify-center border rounded-lg bg-zinc-50 dark:bg-zinc-900">
+        <ConstructionIcon strokeWidth={1.25} className="size-20 text-yellow-600 opacity-85" />
+        <p className="text-lg">Página em construção...</p>
+      </div>
     </Fragment>
   )
 }
