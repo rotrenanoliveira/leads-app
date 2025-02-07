@@ -124,8 +124,19 @@ export const campaignInfoSchema = campaignSchema.omit({
   userId: true,
 })
 
+/** campaign basic info */
+export const campaignBasicInfoSchema = campaignSchema.pick({
+  id: true,
+  name: true,
+  campaignUrl: true,
+  active: true,
+  createdAt: true,
+})
+
 /** campaign */
 export type Campaign = z.infer<typeof campaignSchema>
+/** campaign basic info */
+export type CampaignBasicInfo = z.infer<typeof campaignBasicInfoSchema>
 /** create campaign input */
 export type CampaignCreateInput = z.infer<typeof campaignCreateInputSchema>
 /** campaign form data input */

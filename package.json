@@ -21,6 +21,7 @@
     "@radix-ui/react-separator": "1.1.1",
     "@radix-ui/react-slot": "1.1.1",
     "@radix-ui/react-tooltip": "1.1.7",
+    "@tanstack/react-table": "8.20.6",
     "@upstash/redis": "1.34.4",
     "axios": "1.7.9",
     "boring-avatars": "1.11.2",
