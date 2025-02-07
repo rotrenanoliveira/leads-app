@@ -50,9 +50,9 @@ export function CampaignsDataTable<TData, TValue>({ columns, data }: CampaignsDa
         <Button variant="default" className="w-fit" asChild>
           <Link
             href="/campaigns/create"
-            className="w-full justify-start p-0 m-0 opacity-85 hover:opacity-100 hover:no-underline"
+            className="w-full justify-start p-0 m-0 capitalize hover:opacity-100 hover:no-underline"
           >
-            Nova campanha
+            nova campanha
           </Link>
         </Button>
       </div>
