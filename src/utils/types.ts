@@ -68,6 +68,7 @@ export const campaignFieldsTypesSchema = z.union([
 /** campaign fields */
 export const campaignFieldsSchema = z.object({
   name: z.string(),
+  slug: z.string(),
   type: campaignFieldsTypesSchema,
 })
 
@@ -81,8 +82,10 @@ export const campaignSchema = z.object({
   id: z.string(),
   name: z.string(),
   title: z.string(),
+  subtitle: z.string(),
   description: z.string(),
   callToAction: z.string(),
+  accentColor: z.string().default('#FACC15'),
   userId: z.string(),
   fields: z.array(campaignFieldsSchema),
   onSuccess: campaignOnSuccess,

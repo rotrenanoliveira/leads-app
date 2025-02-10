@@ -34,8 +34,10 @@ model Campaign {
   userId       String   @map("user_id")
   name         String
   title        String
+  subtitle     String   @default("")
   description  String
   callToAction String   @map("call_to_action")
+  accentColor  String   @default("#FACC15") @map("accent_color")
   fields       String
   onSuccess    String   @map("on_success")
   imageUrl     String?  @map("image_url")

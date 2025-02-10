@@ -47,7 +47,7 @@ export function CampaignsDataTable<TData, TValue>({ columns, data }: CampaignsDa
           className="max-w-sm bg-white dark:bg-zinc-950"
         />
 
-        <Button variant="default" className="w-fit" asChild>
+        <Button variant="default" className="w-fit max-w-40" asChild>
           <Link
             href="/campaigns/create"
             className="w-full justify-start p-0 m-0 capitalize hover:opacity-100 hover:no-underline"

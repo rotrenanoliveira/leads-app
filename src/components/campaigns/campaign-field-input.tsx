@@ -15,8 +15,17 @@ interface CampaignFieldInputProps {
 export function CampaignFieldInput({ field, changeField, removeField }: CampaignFieldInputProps) {
   function handleChangeFieldName(event: React.ChangeEvent<HTMLInputElement>) {
     const value = event.target.value
+    const slug = value
+      .normalize('NFKD')
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/[^\w-]+/g, '')
+      .replace(/_/g, '-')
+      .replace(/--+/g, '-')
+      .replace(/-$/g, '')
 
-    changeField({ ...field, field: value })
+    changeField({ ...field, field: value, slug })
   }
 
   function handleChangeFieldType(value: string) {

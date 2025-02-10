@@ -1,29 +1,31 @@
 'use client'
 
+import { useRef, useState, useTransition } from 'react'
+import { CirclePlusIcon, Loader2Icon, PlusIcon } from 'lucide-react'
+import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 import {
   campaignFieldsTypesSchema,
   campaignOnSuccess,
   type CampaignFieldsTypes,
   type CampaignFormDataInput,
 } from '@/utils/types'
+import { Textarea } from '../ui/textarea'
 import { Input } from '../ui/input'
 import { Label } from '../ui/label'
-import { Textarea } from '../ui/textarea'
-import { useRef, useState, useTransition } from 'react'
 import { CampaignFieldInput } from './campaign-field-input'
 import { Button } from '../ui/button'
-import { CirclePlusIcon, Loader2Icon, PlusIcon } from 'lucide-react'
 import { Separator } from '../ui/separator'
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group'
-import { useRouter } from 'next/navigation'
 import { CampaignInputImage } from './campaign-input-image'
+import { CampaignInputAccentColor } from './campaign-input-accent-color'
 import { actionCreateCampaign } from '@/server/actions/create-campaign'
-import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 
 export interface CampaignField {
   name: string
   field: string
+  slug: string
   type: CampaignFieldsTypes
 }
 
@@ -39,7 +41,7 @@ export function CreateCampaignForm() {
 
   function handleAddField() {
     setFields(() =>
-      [...fields, { name: `field-key-${fields.length + 1}`, field: '', type: 'text' }].map((field, index) => {
+      [...fields, { name: `field-key-${fields.length + 1}`, field: '', slug: '', type: 'text' }].map((field, index) => {
         return { ...field, name: `field-key-${index}`, type: campaignFieldsTypesSchema.parse(field.type) }
       }),
     )
@@ -77,15 +79,23 @@ export function CreateCampaignForm() {
       const campaign: CampaignFormDataInput = {
         name: data.campaign.toString(),
         title: data.title.toString(),
+        subtitle: data.subtitle.toString(),
+        accentColor: data['accent-color'].toString(),
         description: data.description.toString(),
         callToAction: data['call-to-action'].toString(),
-        fields: fields.map((field) => ({ name: field.field, type: field.type })),
+        fields: fields.map((field) => ({ name: field.field, type: field.type, slug: field.slug })),
         campaignImage: data['campaign-image'],
         onSuccess: campaignOnSuccess.parse({
           type: data['on-success'],
           data: data['on-success-data'].toString(),
         }),
         imageUrl: undefined,
+      }
+
+      if (campaign.fields.length === 0) {
+        toast.error('Campanha deve ter pelo menos um campo!')
+
+        return
       }
 
       const [result, error] = await actionCreateCampaign(campaign)
@@ -134,12 +144,27 @@ export function CreateCampaignForm() {
       </div>
 
       <div className="space-y-2">
+        <Label htmlFor="subtitle">Subtítulo da campanha</Label>
+        <Input
+          type="text"
+          id="subtitle"
+          name="subtitle"
+          placeholder="subtítulo da campanha"
+          className="bg-white dark:bg-zinc-950"
+          required
+        />
+        <p className="font-medium text-sm text-muted-foreground">
+          Este será o subtítulo da campanha, será visível para os usuários e é importante para o SEO.
+        </p>
+      </div>
+
+      <div className="space-y-2">
         <Label htmlFor="description">Descrição da campanha</Label>
         <Textarea
           id="description"
           name="description"
-          placeholder="Descreva o produto/campanha em até 450 caracteres."
-          maxLength={450}
+          placeholder="Descreva o produto/campanha em até 200 caracteres."
+          maxLength={200}
           className="bg-white dark:bg-zinc-950"
           required
         />
@@ -162,6 +187,8 @@ export function CreateCampaignForm() {
           Call to Action é o texto que o usuário verá no botão, por exemplo "Adquira agora" ou "Saiba mais".
         </p>
       </div>
+
+      <CampaignInputAccentColor />
 
       <CampaignInputImage />
 

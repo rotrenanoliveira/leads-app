@@ -17,8 +17,10 @@ const actionCreateCampaignSchema = z
   .object({
     name: z.string().min(1, { message: 'Nome da campanha é obrigatório' }),
     title: z.string().min(1, { message: 'Título da campanha é obrigatório' }),
+    subtitle: z.string().min(1, { message: 'Subtítulo da campanha é obrigatório' }),
     description: z.string().min(1, { message: 'Descrição da campanha é obrigatório' }),
     callToAction: z.string().min(1, { message: 'Call to Action é obrigatório' }),
+    accentColor: z.string(),
     campaignImage: z
       .any()
       .refine((file) => !!file, 'Por favor, insira uma imagem para o carrossel.')
@@ -122,8 +124,10 @@ export async function actionCreateCampaign(
           id: campaign.id,
           name: campaign.name,
           title: campaign.title,
+          subtitle: campaign.subtitle,
           description: campaign.description,
           callToAction: campaign.callToAction,
+          accentColor: campaign.accentColor,
           fields: formResult.data.fields,
           onSuccess: formResult.data.onSuccess,
           imageUrl: campaign.imageUrl,
