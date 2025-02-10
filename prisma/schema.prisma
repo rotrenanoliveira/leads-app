@@ -46,8 +46,21 @@ model Campaign {
   createdAt    DateTime @default(now()) @map("created_at")
   updatedAt    DateTime @updatedAt @map("updated_at")
 
-  user User @relation(fields: [userId], references: [id])
+  user  User   @relation(fields: [userId], references: [id])
+  leads Lead[]
 
   @@index([userId])
   @@map("campaigns")
+}
+
+model Lead {
+  id         String   @id
+  campaignId String   @map("campaign_id")
+  data       String
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id])
+
+  @@index([campaignId])
+  @@map("leads")
 }
