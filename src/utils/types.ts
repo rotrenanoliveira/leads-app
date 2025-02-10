@@ -68,6 +68,7 @@ export const campaignFieldsTypesSchema = z.union([
 /** campaign fields */
 export const campaignFieldsSchema = z.object({
   name: z.string(),
+  slug: z.string(),
   type: campaignFieldsTypesSchema,
 })
 
@@ -81,8 +82,10 @@ export const campaignSchema = z.object({
   id: z.string(),
   name: z.string(),
   title: z.string(),
+  subtitle: z.string(),
   description: z.string(),
   callToAction: z.string(),
+  accentColor: z.string().default('#FACC15'),
   userId: z.string(),
   fields: z.array(campaignFieldsSchema),
   onSuccess: campaignOnSuccess,
@@ -133,6 +136,20 @@ export const campaignBasicInfoSchema = campaignSchema.pick({
   createdAt: true,
 })
 
+/** lead create input */
+export const leadCreateInputSchema = z.object({
+  campaignId: z.string(),
+  data: z.string(),
+})
+
+/** lead */
+export const leadSchema = z.object({
+  id: z.string(),
+  campaignId: z.string(),
+  data: z.string(),
+  createdAt: z.coerce.date(),
+})
+
 /** campaign */
 export type Campaign = z.infer<typeof campaignSchema>
 /** campaign basic info */
@@ -149,6 +166,10 @@ export type CampaignFields = z.infer<typeof campaignFieldsSchema>
 export type CampaignImage = { file: string; url: string }
 /** campaign info */
 export type CampaignInfo = z.infer<typeof campaignInfoSchema>
+/** lead create input */
+export type LeadCreateInput = z.infer<typeof leadCreateInputSchema>
+/** lead */
+export type Lead = z.infer<typeof leadSchema>
 /** user */
 export type User = z.infer<typeof userSchema>
 /** create user input */

@@ -34,8 +34,10 @@ model Campaign {
   userId       String   @map("user_id")
   name         String
   title        String
+  subtitle     String   @default("")
   description  String
   callToAction String   @map("call_to_action")
+  accentColor  String   @default("#FACC15") @map("accent_color")
   fields       String
   onSuccess    String   @map("on_success")
   imageUrl     String?  @map("image_url")
@@ -44,8 +46,21 @@ model Campaign {
   createdAt    DateTime @default(now()) @map("created_at")
   updatedAt    DateTime @updatedAt @map("updated_at")
 
-  user User @relation(fields: [userId], references: [id])
+  user  User   @relation(fields: [userId], references: [id])
+  leads Lead[]
 
   @@index([userId])
   @@map("campaigns")
+}
+
+model Lead {
+  id         String   @id
+  campaignId String   @map("campaign_id")
+  data       String
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  campaign Campaign @relation(fields: [campaignId], references: [id])
+
+  @@index([campaignId])
+  @@map("leads")
 }

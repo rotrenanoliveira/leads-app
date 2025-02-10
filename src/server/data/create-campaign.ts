@@ -8,7 +8,7 @@ export async function createCampaign(
   data: CampaignCreateInput,
 ): Promise<[PrismaCampaign, null] | [null, ResponseError]> {
   const campaignId = generateNanoId()
-  const campaignUrl = new URL(campaignId, 'https://app.linkdiario.com/campaigns/')
+  const campaignUrl = new URL(campaignId, 'https://lcampaigns.vercel.app/campaigns/')
 
   const result = await handle(
     prisma.campaign.create({
@@ -17,8 +17,10 @@ export async function createCampaign(
         userId: data.userId,
         name: data.name,
         title: data.title,
+        subtitle: data.subtitle,
         description: data.description,
         callToAction: data.callToAction,
+        accentColor: data.accentColor,
         fields: JSON.stringify(data.fields),
         onSuccess: JSON.stringify(data.onSuccess),
         imageUrl: data.imageUrl,

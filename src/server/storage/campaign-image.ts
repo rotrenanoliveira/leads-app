@@ -23,7 +23,17 @@ export async function uploadCampaignImage(image: File) {
     throw new Error('Tipo de arquivo inválido')
   }
 
-  const fileKey = generateNanoId().concat('-').concat(image.name)
+  const fileName = image.name
+    .normalize('NFKD')
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w-]+/g, '')
+    .replace(/_/g, '-')
+    .replace(/--+/g, '-')
+    .replace(/-$/g, '')
+
+  const fileKey = generateNanoId().concat('-').concat(fileName)
   const fileType = image.type
   // const fileName = image.name
 
