@@ -103,7 +103,8 @@ export const campaignsTableColumns: ColumnDef<CampaignBasicInfo>[] = [
               onClick={() => handleCopyToClipboard(info.getValue<string>())}
             >
               <ClipboardIcon className="mr-2 size-4" />
-              {info.getValue<string>().split('.com')[1]}
+              {/* TODO: this maybe change if the domain name changes */}
+              {info.getValue<string>().split('.app')[1]}
             </Badge>
           </TooltipTrigger>
           <TooltipContent>
