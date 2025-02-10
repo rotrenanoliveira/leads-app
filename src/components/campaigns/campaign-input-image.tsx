@@ -24,6 +24,11 @@ export function CampaignInputImage() {
 
     const inputFile = fileList[0]
 
+    if (inputFile.size > 1024 * 1024 * 2) {
+      toast.error('O tamanho máximo da imagem é 2MB.')
+      return
+    }
+
     const isFileAnImage = inputFile.type.startsWith('image/')
 
     if (!isFileAnImage) {
