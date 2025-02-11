@@ -5,7 +5,7 @@ import { CampaignLeadsLoader } from '@/components/campaigns/campaign-leads-loade
 import { Separator } from '@/components/ui/separator'
 import { getCampaign } from '@/server/data/get-campaign'
 
-export default async function CampaignLeads({ params }: { params: { campaign: string } }) {
+export default async function CampaignLeads({ params }: { params: Promise<{ campaign: string }> }) {
   const campaignId = (await params).campaign
 
   const [result, resultError] = await getCampaign(campaignId)
