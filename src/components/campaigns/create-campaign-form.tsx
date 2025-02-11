@@ -21,6 +21,7 @@ import { CampaignInputImage } from './campaign-input-image'
 import { CampaignInputAccentColor } from './campaign-input-accent-color'
 import { actionCreateCampaign } from '@/server/actions/create-campaign'
 import { cn } from '@/lib/utils'
+import { z } from 'zod'
 
 export interface CampaignField {
   name: string
@@ -112,6 +113,18 @@ export function CreateCampaignForm() {
 
         if (!wppNumber.match(/^\(?\d{2}\)?\s?(?:9\d{4}|\d{4})-?\d{4}$/)) {
           toast.error('O número de WhatsApp é inválido.')
+          return
+        }
+      }
+
+      if (campaign.onSuccess.type === 'redirect') {
+        const validation = z
+          .string()
+          .url({ message: 'URL inválida. Exemplo: https://www.google.com' })
+          .safeParse(campaign.onSuccess.data)
+
+        if (validation.success === false) {
+          toast.error('URL inválida. Exemplo: https://www.google.com')
           return
         }
       }
