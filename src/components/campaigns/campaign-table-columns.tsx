@@ -9,6 +9,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/
 import { toast } from 'sonner'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu'
 import { actionDisableCampaign, actionEnableCampaign, actionRemoveCampaign } from '@/server/actions/update-campaign'
+import Link from 'next/link'
 
 function handleCopyToClipboard(text: string) {
   navigator.clipboard.writeText(text)
@@ -55,6 +56,15 @@ export const campaignsTableColumns: ColumnDef<CampaignBasicInfo>[] = [
   {
     accessorKey: 'id',
     header: 'ID',
+  },
+  {
+    accessorKey: 'leads',
+    header: 'Leads',
+    cell: ({ row }) => (
+      <Button variant="secondary" asChild>
+        <Link href={`/campaigns/${row.original.id}/leads`}>Ver leads</Link>
+      </Button>
+    ),
   },
   {
     accessorKey: 'createdAt',
