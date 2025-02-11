@@ -10,6 +10,7 @@ export async function saveLead(data: LeadCreateInput): Promise<[PrismaLead, null
       data: {
         id: generateNanoId(),
         campaignId: data.campaignId,
+        userId: data.userId,
         data: data.data,
       },
     }),

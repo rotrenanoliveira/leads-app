@@ -4,8 +4,7 @@ import { saveLead } from '@/server/data/save-lead'
 export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const campaignId = (await params).id
 
-  const getCampaignResult = await getCampaign(campaignId)
-  const getCampaignError = getCampaignResult[1]
+  const [campaign, getCampaignError] = await getCampaign(campaignId)
 
   if (getCampaignError) {
     return new Response(JSON.stringify(getCampaignError), {
@@ -18,6 +17,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
 
   const [_, queryError] = await saveLead({
     campaignId,
+    userId: campaign.userId,
     data: JSON.stringify(body),
   })
 

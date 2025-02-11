@@ -139,6 +139,7 @@ export const campaignBasicInfoSchema = campaignSchema.pick({
 /** lead create input */
 export const leadCreateInputSchema = z.object({
   campaignId: z.string(),
+  userId: z.string(),
   data: z.string(),
 })
 
@@ -147,6 +148,14 @@ export const leadSchema = z.object({
   id: z.string(),
   campaignId: z.string(),
   data: z.string(),
+  createdAt: z.coerce.date(),
+})
+
+/** leads details */
+export const leadsDetailsSchema = z.object({
+  id: z.string(),
+  campaignId: z.string(),
+  campaignName: z.string(),
   createdAt: z.coerce.date(),
 })
 
@@ -168,6 +177,8 @@ export type CampaignImage = { file: string; url: string }
 export type CampaignInfo = z.infer<typeof campaignInfoSchema>
 /** lead create input */
 export type LeadCreateInput = z.infer<typeof leadCreateInputSchema>
+/** leads details */
+export type LeadsDetails = z.infer<typeof leadsDetailsSchema>
 /** lead */
 export type Lead = z.infer<typeof leadSchema>
 /** user */
