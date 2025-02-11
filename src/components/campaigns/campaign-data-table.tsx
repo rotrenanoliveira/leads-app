@@ -16,6 +16,7 @@ import React from 'react'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import Link from 'next/link'
+import { PlusCircleIcon } from 'lucide-react'
 
 interface CampaignsDataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -39,7 +40,7 @@ export function CampaignsDataTable<TData, TValue>({ columns, data }: CampaignsDa
 
   return (
     <div>
-      <div className="flex justify-between items-center py-4">
+      <div className="flex justify-between items-center py-4 gap-4">
         <Input
           placeholder="Filtro por nome..."
           value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
@@ -47,12 +48,13 @@ export function CampaignsDataTable<TData, TValue>({ columns, data }: CampaignsDa
           className="max-w-sm bg-white dark:bg-zinc-950"
         />
 
-        <Button variant="default" className="w-fit max-w-40" asChild>
+        <Button variant="default" className="w-fit md:max-w-40" asChild>
           <Link
             href="/campaigns/create"
-            className="w-full justify-start p-0 m-0 capitalize hover:opacity-100 hover:no-underline"
+            className="w-fit justify-start p-0 m-0 capitalize hover:opacity-100 hover:no-underline"
           >
-            nova campanha
+            <PlusCircleIcon className="size-5 text-muted-foreground md:hidden" />
+            <span className="hidden md:inline">nova campanha</span>
           </Link>
         </Button>
       </div>
@@ -77,7 +79,9 @@ export function CampaignsDataTable<TData, TValue>({ columns, data }: CampaignsDa
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                    <TableCell key={cell.id} className="text-nowrap">
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </TableCell>
                   ))}
                 </TableRow>
               ))

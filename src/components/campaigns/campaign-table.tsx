@@ -17,7 +17,7 @@ export async function CampaignsTable() {
   }
 
   return (
-    <div className="container mx-auto">
+    <div>
       <CampaignsDataTable columns={campaignsTableColumns} data={campaigns} />
     </div>
   )

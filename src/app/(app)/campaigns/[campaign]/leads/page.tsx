@@ -33,9 +33,9 @@ export default async function CampaignLeads({ params }: { params: { campaign: st
       <div className="flex-1 p-6 overflow-y-auto border rounded-lg bg-zinc-50 dark:bg-zinc-900">
         {/* page title */}
         <div>
-          <div className="inline-flex items-center gap-1">
-            <h1 className="text-2xl font-medium">Campanha - {campaignName}</h1>
-            <span className="text-2xl font-light text-muted-foreground">: lista de leads da campanhas</span>
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-1">
+            <h1 className="text-lg md:text-2xl font-medium">Campanha - {campaignName}</h1>
+            <span className="text-lg md:text-2xl font-light text-muted-foreground">: lista de leads da campanhas</span>
           </div>
 
           <Separator className="my-4 bg-zinc-300 dark:bg-zinc-600" />
