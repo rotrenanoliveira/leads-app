@@ -14,6 +14,10 @@ export async function CampaignsLeads({ campaignId }: CampaignsLeadsProps) {
 
   const { leads, campaign } = result
 
+  if (leads.length === 0) {
+    return <div className="text-center">Nenhum lead encontrado.</div>
+  }
+
   return (
     <div className="mx-auto">
       <CampaignLeadsDataTable data={leads} campaign={campaign} />
