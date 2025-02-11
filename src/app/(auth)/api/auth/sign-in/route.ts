@@ -53,7 +53,7 @@ export async function GET(request: Request) {
     redirect('/login-failed')
   }
 
-  const deleteTokensResult = await deleteTokens(user.email)
+  const deleteTokensResult = await deleteTokens(token, user.email)
 
   if (deleteTokensResult[0] === null) {
     console.log('delete tokens error', deleteTokensResult[1])
