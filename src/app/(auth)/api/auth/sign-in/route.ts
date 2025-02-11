@@ -9,6 +9,11 @@ export async function GET(request: Request) {
   const token = searchParams.get('token')
   const email = searchParams.get('email')
 
+  console.log('REQUEST URL', request.url)
+  console.log('SEARCH PARAMS', searchParams)
+  console.log('TOKEN', token)
+  console.log('EMAIL', email)
+
   if (!token || !email) {
     console.log('token or email not found')
     redirect('/login-failed')
@@ -27,6 +32,8 @@ export async function GET(request: Request) {
   }
 
   const [tokenResult, getTokenError] = await getToken(token, user.email)
+
+  console.log('tokenResult', tokenResult)
 
   if (getTokenError) {
     console.log('get token error', getTokenError)

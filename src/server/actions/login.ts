@@ -1,5 +1,6 @@
 'use server'
 
+import { env } from '@/env'
 import { generateNanoId } from '@/lib/nanoid'
 import { formatZodError, handle } from '@/utils/functions'
 import { tokenCreateInputSchema, userCreateInputSchema } from '@/utils/types'
@@ -41,7 +42,7 @@ export async function actionLogin(data: FormData) {
   const mailResult = await handle(
     axios.post('https://hermodr.vercel.app/api/send-mail', {
       mailto: formResult.data.email,
-      accessCode: `https://leadsinfo.vercel.app/api/auth/sign-in?token=${token}&email=${formResult.data.email}`,
+      accessCode: `${env.APP_URL}/api/auth/sign-in?token=${token}&email=${formResult.data.email}`,
       app: 'leads',
     }),
   )
