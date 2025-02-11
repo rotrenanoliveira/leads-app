@@ -15,6 +15,7 @@ export async function NavbarUser() {
   const user = userResult[0]
 
   const username = user.email.split('@')[0]
+  const usernameStr = username.length > 16 ? username.substring(0, 13).concat('...') : username
 
   return (
     <DropdownMenu>
@@ -27,7 +28,7 @@ export async function NavbarUser() {
             <Settings2Icon strokeWidth={1.15} className="size-6" />
           </div>
           <div className="grid flex-1 text-left text-sm leading-tight md:hidden lg:block">
-            <span className="truncate font-medium">{username}</span>
+            <span className="truncate font-medium">{usernameStr}</span>
           </div>
           <ChevronsUpDown className="ml-auto size-4" />
         </button>
