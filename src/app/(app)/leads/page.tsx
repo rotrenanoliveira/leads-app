@@ -1,11 +1,18 @@
-import { Breadcrumb } from '@/components/breadcrumb'
-import { CampaignsTable } from '@/components/campaigns/campaign-table'
-import { Separator } from '@/components/ui/separator'
+import { Loader2Icon } from 'lucide-react'
 import { Suspense } from 'react'
 
-const breadcrumbItems = [{ url: '/', label: 'Home' }, { label: 'Campanhas' }]
+import { Breadcrumb } from '@/components/breadcrumb'
+import { Separator } from '@/components/ui/separator'
+import { LeadsDetailsTable } from '@/components/leads/leads-table'
 
-export default function Campaigns() {
+const breadcrumbItems = [{ url: '/', label: 'Home' }, { label: 'Leads' }]
+
+export const metadata = {
+  title: 'Leads - leads.gratis',
+  description: 'Lista de leads',
+}
+
+export default function Leads() {
   return (
     <div className="h-[calc(100dvh-32px)] flex flex-col gap-4">
       {/* breadcrumbs */}
@@ -17,14 +24,14 @@ export default function Campaigns() {
         {/* page title */}
         <div>
           <div className="inline-flex items-center gap-1">
-            <h1 className="text-lg md:text-2xl font-medium">Campanhas</h1>
-            <span className="text-lg md:text-2xl font-light text-muted-foreground">: lista de campanhas</span>
+            <h1 className="text-2xl font-medium">Leads</h1>
+            <span className="text-2xl font-light text-muted-foreground">: lista de leads</span>
           </div>
-          <p className="text-sm text-muted-foreground">São a forma de se comunicar com seus clientes e gerar leads.</p>
+
           <Separator className="my-4 bg-zinc-300 dark:bg-zinc-600" />
 
-          <Suspense>
-            <CampaignsTable />
+          <Suspense fallback={<Loader2Icon className="size-5 animate-spin" />}>
+            <LeadsDetailsTable />
           </Suspense>
         </div>
       </div>

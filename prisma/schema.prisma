@@ -25,6 +25,7 @@ model User {
   updatedAt DateTime @updatedAt
 
   campaigns Campaign[]
+  leads     Lead[]
 
   @@map("users")
 }
@@ -55,12 +56,15 @@ model Campaign {
 
 model Lead {
   id         String   @id
+  userId     String   @map("user_id")
   campaignId String   @map("campaign_id")
   data       String
   createdAt  DateTime @default(now()) @map("created_at")
 
   campaign Campaign @relation(fields: [campaignId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
 
   @@index([campaignId])
+  @@index([userId])
   @@map("leads")
 }

@@ -13,17 +13,20 @@ import {
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import React from 'react'
-import { Input } from '../ui/input'
-import { Button } from '../ui/button'
-import Link from 'next/link'
-import { PlusCircleIcon } from 'lucide-react'
+import { LeadsTableToolbar } from './leads-table-toolbar'
 
-interface CampaignsDataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+interface CampaignFilter {
+  label: string
+  value: string
 }
 
-export function CampaignsDataTable<TData, TValue>({ columns, data }: CampaignsDataTableProps<TData, TValue>) {
+interface LeadsDetailsTableProps<TData, TValue> {
+  columns: ColumnDef<TData, TValue>[]
+  data: TData[]
+  campaigns: CampaignFilter[]
+}
+
+export function LeadsDetailsTable<TData, TValue>({ columns, data, campaigns }: LeadsDetailsTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
 
@@ -39,25 +42,8 @@ export function CampaignsDataTable<TData, TValue>({ columns, data }: CampaignsDa
   })
 
   return (
-    <div>
-      <div className="flex justify-between items-center py-4 gap-4">
-        <Input
-          placeholder="Filtro por nome..."
-          value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
-          onChange={(event) => table.getColumn('name')?.setFilterValue(event.target.value)}
-          className="max-w-sm bg-white dark:bg-zinc-950"
-        />
-
-        <Button variant="default" className="w-fit md:max-w-40" asChild>
-          <Link
-            href="/campaigns/create"
-            className="w-fit justify-start p-0 m-0 capitalize hover:opacity-100 hover:no-underline"
-          >
-            <PlusCircleIcon className="size-5 text-muted-foreground md:hidden" />
-            <span className="hidden md:inline">nova campanha</span>
-          </Link>
-        </Button>
-      </div>
+    <div className="space-y-4">
+      <LeadsTableToolbar table={table} campaigns={campaigns} />
 
       <div className="rounded-md border">
         <Table>
@@ -66,7 +52,7 @@ export function CampaignsDataTable<TData, TValue>({ columns, data }: CampaignsDa
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className="text-nowrap">
                       {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                     </TableHead>
                   )

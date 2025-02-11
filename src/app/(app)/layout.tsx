@@ -16,9 +16,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   if (!userId) redirect('/login')
 
   return (
-    <div
-      className={cn(spaceGrotesk.className, 'w-screen flex flex-col-reverse md:flex-col lg:flex-row gap-4 p-4 h-svh')}
-    >
+    <div className={cn(spaceGrotesk.className, 'flex flex-col-reverse md:flex-col lg:flex-row gap-4 p-4 md:h-svh')}>
       <aside className="w-full lg:max-w-60 flex flex-col md:flex-row lg:flex-col gap-4">
         <div className="w-full md:max-w-60 max-h-20 border border-border p-6 md:p-3 lg:p-6 rounded-lg bg-zinc-50 dark:bg-zinc-900">
           <Link
@@ -58,11 +56,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             </Button>
             <Button
               variant="link"
-              className="w-full justify-start p-0 m-0 opacity-85 hover:opacity-100 hover:no-underline hover:line-through"
+              className="w-full justify-start p-0 m-0 opacity-85 hover:opacity-100 hover:no-underline"
               disabled
               asChild
             >
-              <Link href="/" className="font-extralight capitalize line-through">
+              <Link href="/leads" className="font-extralight capitalize">
                 <NotebookTextIcon strokeWidth={1.15} className="size-6" />
                 leads
               </Link>
@@ -73,7 +71,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </div>
       </aside>
 
-      <main className="flex-1 h-[calc(100dvh-32px)] flex flex-col gap-4">{children}</main>
+      <main className="flex-1 overflow-y-hidden">{children}</main>
     </div>
   )
 }
