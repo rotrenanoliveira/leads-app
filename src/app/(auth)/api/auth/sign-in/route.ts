@@ -1,4 +1,3 @@
-import { deleteTokens } from '@/server/data/delete-tokens'
 import { getToken } from '@/server/data/get-token'
 import { getUser } from '@/server/data/get-user'
 import { cookies } from 'next/headers'
@@ -8,11 +7,6 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const token = searchParams.get('token')
   const email = searchParams.get('email')
-
-  console.log('REQUEST URL', request.url)
-  console.log('SEARCH PARAMS', searchParams)
-  console.log('TOKEN', token)
-  console.log('EMAIL', email)
 
   if (!token || !email) {
     console.log('token or email not found')
@@ -33,8 +27,6 @@ export async function GET(request: Request) {
 
   const [tokenResult, getTokenError] = await getToken(token, user.email)
 
-  console.log('tokenResult', tokenResult)
-
   if (getTokenError) {
     console.log('get token error', getTokenError)
     redirect('/login-failed')
@@ -53,12 +45,13 @@ export async function GET(request: Request) {
     redirect('/login-failed')
   }
 
-  const deleteTokensResult = await deleteTokens(token, user.email)
+  // TODO: idk maybe this is needed
+  // const deleteTokensResult = await deleteTokens(token, user.email)
 
-  if (deleteTokensResult[0] === null) {
-    console.log('delete tokens error', deleteTokensResult[1])
-    redirect('/login-failed')
-  }
+  // if (deleteTokensResult[0] === null) {
+  //   console.log('delete tokens error', deleteTokensResult[1])
+  //   redirect('/login-failed')
+  // }
 
   const cookieStore = await cookies()
 
