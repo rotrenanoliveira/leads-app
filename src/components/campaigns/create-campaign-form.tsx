@@ -98,6 +98,24 @@ export function CreateCampaignForm() {
         return
       }
 
+      if (campaign.onSuccess.type === 'whatsapp') {
+        const wppNumber = campaign.onSuccess.data.replaceAll(' ', '')
+        if (wppNumber.length !== 11) {
+          toast.error('O número de WhatsApp deve ter 11 dígitos.')
+          return
+        }
+
+        if (Number.isNaN(wppNumber)) {
+          toast.error('O número de WhatsApp é inválido.')
+          return
+        }
+
+        if (!wppNumber.match(/^\(?\d{2}\)?\s?(?:9\d{4}|\d{4})-?\d{4}$/)) {
+          toast.error('O número de WhatsApp é inválido.')
+          return
+        }
+      }
+
       const [result, error] = await actionCreateCampaign(campaign)
 
       if (result === null) {
