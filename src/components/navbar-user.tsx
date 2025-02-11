@@ -10,7 +10,7 @@ export async function NavbarUser() {
   if (!userId) return null
 
   const userResult = await getUserById(userId.value)
-  if (userResult[0] === null) redirect('/login')
+  if (userResult[0] === null) redirect('/api/auth/sign-out')
 
   const user = userResult[0]
 
